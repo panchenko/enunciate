@@ -2,6 +2,13 @@ dist: precise
 language: java
 jdk:
   - oraclejdk7
+addons:
+  apt:
+    packages:
+    - mono-devel
+    - mono-gmcs
+    - libxml2-dev
+    - gnustep-make
 cache:
   directories:
     - $HOME/.m2/repository
@@ -9,4 +16,4 @@ before_cache:
   - rm -rf $HOME/.m2/repository/com/webcohesion/enunciate
   - rm -rf $HOME/.m2/repository/repository.xml
 install: true
-script: mvn install
+script: mvn -Dgmcs.executable=gmcs -Dgcc.executable=gcc -Dlibxml.config.executable= -Dlibxml.config.executable=xml2-config -Dgnustep.config.executable=gnustep-config -Dactivate.full.tests=true install
